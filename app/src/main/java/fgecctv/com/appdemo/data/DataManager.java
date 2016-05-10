@@ -10,4 +10,19 @@ package fgecctv.com.appdemo.data;
  */
 public class DataManager {
 
+    private static DataManager dataManager ;
+
+    private DataManager() {
+    }
+
+    public static DataManager getInstance() {
+        if (dataManager == null) {
+            synchronized (DataManager.class) {
+                if (dataManager == null) {
+                    dataManager = new DataManager();
+                }
+            }
+        }
+        return dataManager;
+    }
 }
