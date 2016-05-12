@@ -12,22 +12,22 @@ import rx.Observable;
  * @Description: (demo 演示realm)
  * @date 2016/5/5 16
  */
-public class UserImple implements UserDao {
+public class UserImpl implements UserDao {
 
-    private UserImple() {
+    private UserImpl() {
     }
 
-    private static UserImple userImple;
+    private static UserImpl userImpli;
 
-    public static UserImple getInstance() {
-        if (userImple == null) {
-            synchronized (UserImple.class) {
-                if (userImple == null) {
-                    userImple = new UserImple();
+    public static UserImpl getInstance() {
+        if (userImpli == null) {
+            synchronized (UserImpl.class) {
+                if (userImpli == null) {
+                    userImpli = new UserImpl();
                 }
             }
         }
-        return userImple;
+        return userImpli;
     }
 
     @Override

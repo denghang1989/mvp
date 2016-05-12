@@ -12,7 +12,7 @@ import io.realm.annotations.Ignore;
  */
 public class User extends RealmObject {
     private String name;
-    private int age;
+    private int    age;
     private String imageUrl;
 
     @Ignore

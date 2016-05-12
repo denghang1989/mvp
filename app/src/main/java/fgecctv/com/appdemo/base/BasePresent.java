@@ -9,5 +9,6 @@ package fgecctv.com.appdemo.base;
  */
 public interface BasePresent {
     void subscribe();
+
     void unsubscribe();
 }

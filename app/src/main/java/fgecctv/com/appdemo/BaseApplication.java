@@ -20,6 +20,9 @@ public class BaseApplication extends Application {
         initRealm();
     }
 
+    /**
+     * 初始化Realm数据库
+     */
     private void initRealm() {
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
         Realm.setDefaultConfiguration(realmConfiguration);

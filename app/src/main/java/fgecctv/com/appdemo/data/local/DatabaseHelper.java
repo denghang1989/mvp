@@ -1,7 +1,7 @@
 package fgecctv.com.appdemo.data.local;
 
 import fgecctv.com.appdemo.data.local.dao.Dao;
-import fgecctv.com.appdemo.data.local.daoImple.UserImple;
+import fgecctv.com.appdemo.data.local.daoImple.UserImpl;
 import fgecctv.com.appdemo.data.model.table.User;
 
 /**
@@ -30,7 +30,7 @@ public class DatabaseHelper {
     }
 
     public Dao<User> getUser() {
-        return UserImple.getInstance();
+        return UserImpl.getInstance();
     }
 
 }

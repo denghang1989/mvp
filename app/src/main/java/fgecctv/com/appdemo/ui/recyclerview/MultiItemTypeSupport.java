@@ -1,8 +1,7 @@
 package fgecctv.com.appdemo.ui.recyclerview;
 
-public interface MultiItemTypeSupport<T>
-{
-	int getLayoutId(int itemType);
+public interface MultiItemTypeSupport<T> {
+    int getLayoutId(int itemType);
 
-	int getItemViewType(int position, T t);
+    int getItemViewType(int position, T t);
 }

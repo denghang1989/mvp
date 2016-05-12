@@ -3,6 +3,7 @@ package fgecctv.com.appdemo.data;
 
 import android.content.Context;
 
+import fgecctv.com.appdemo.data.local.DatabaseHelper;
 import fgecctv.com.appdemo.data.local.PreferencesHelper;
 import fgecctv.com.appdemo.data.remote.APIService;
 import fgecctv.com.appdemo.data.remote.RetrofitService;
@@ -19,10 +20,12 @@ public class DataManager {
     private static DataManager mDataManager;
     private static APIService mApiService;
     private static PreferencesHelper mSpHelper;
+    private static DatabaseHelper mDbHelper;
 
     private DataManager(Context context) {
         mApiService = RetrofitService.getApiService(context);
         mSpHelper = PreferencesHelper.getInstance(context);
+        mDbHelper = DatabaseHelper.getInstance();
     }
 
     public static DataManager getInstance(Context context) {
@@ -35,6 +38,8 @@ public class DataManager {
         }
         return mDataManager;
     }
+
+
 
 
 
