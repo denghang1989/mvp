@@ -1,28 +1,36 @@
 package fgecctv.com.appdemo.data.local;
 
-import fgecctv.com.appdemo.data.local.dao.UserDao;
+import fgecctv.com.appdemo.data.local.dao.Dao;
 import fgecctv.com.appdemo.data.local.daoImple.UserImple;
+import fgecctv.com.appdemo.data.model.table.User;
 
 /**
  * @author denghang
  * @version V1.0
  * @Package fgecctv.com.appdemo.data.local
- * @Description: (表的操作类)
+ * @Description: (多个工厂方法模式)
  * @date 2016/5/5 15
  */
 public class DatabaseHelper {
 
-    private static UserImple mUserImple;
+    private static DatabaseHelper mDatabaseHelper;
 
-    public static UserDao newInstance() {
-        if (mUserImple == null) {
+    private DatabaseHelper() {
+    }
+
+    public static DatabaseHelper getInstance() {
+        if (mDatabaseHelper == null) {
             synchronized (DatabaseHelper.class) {
-                if (mUserImple == null) {
-                    mUserImple = new UserImple();
+                if (mDatabaseHelper == null) {
+                    mDatabaseHelper = new DatabaseHelper();
                 }
             }
         }
-        return mUserImple;
+        return mDatabaseHelper;
+    }
+
+    public Dao<User> getUser() {
+        return UserImple.getInstance();
     }
 
 }

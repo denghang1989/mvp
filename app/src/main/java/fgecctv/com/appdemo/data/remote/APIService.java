@@ -19,20 +19,15 @@ public interface APIService {
     /**
      * 天气的service
      */
-    interface WeatherService{
+    // 百度天气api 获取天气 手动解析
+    @Headers("apikey:cec4e963be2a3073785eeaa9c3aa237f")
+    @GET("http://apis.baidu.com/apistore/weatherservice/weather")
+    Observable<WeatherDataBean> getWeatherByCity(@Query("citypinyin") String citypinyin);
 
-        // 百度天气api 获取天气 手动解析
-        @Headers("apikey:cec4e963be2a3073785eeaa9c3aa237f")
-        @GET("http://apis.baidu.com/apistore/weatherservice/weather")
-        Observable<WeatherDataBean> getWeatherByCity(@Query("citypinyin") String citypinyin);
-
-        /*百度未来4天天气的api*/
-        @Headers("apikey:cec4e963be2a3073785eeaa9c3aa237f")
-        @GET("http://apis.baidu.com/apistore/weatherservice/recentweathers")
-        Observable<FourDayWeather> get4dayWeatherDataByCity(@Query("cityname") String city);
-    }
-
-
+    /*百度未来4天天气的api*/
+    @Headers("apikey:cec4e963be2a3073785eeaa9c3aa237f")
+    @GET("http://apis.baidu.com/apistore/weatherservice/recentweathers")
+    Observable<FourDayWeather> get4dayWeatherDataByCity(@Query("cityname") String city);
 
 
 }

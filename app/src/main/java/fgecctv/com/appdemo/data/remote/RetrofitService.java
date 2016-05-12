@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitService {
 
     private static final String BASE_URL = "http://120.24.181.136/cloud/";
-    private static APIService.WeatherService weatherService;
+    private static APIService apiService;
 
     private static Retrofit createRetrofit(Context context) {
         Gson gson = new GsonBuilder().
@@ -37,15 +37,15 @@ public class RetrofitService {
                 .build();
     }
 
-    public static APIService.WeatherService getWeatherService(Context context) {
-        if (weatherService == null) {
+    public static APIService getApiService(Context context) {
+        if (apiService == null) {
             synchronized (RetrofitService.class) {
-                if (weatherService == null) {
-                    weatherService = createRetrofit(context).create(APIService.WeatherService.class);
+                if (apiService == null) {
+                    apiService = createRetrofit(context).create(APIService.class);
                 }
             }
         }
-        return weatherService;
+        return apiService;
     }
 
 

@@ -1,6 +1,12 @@
 package fgecctv.com.appdemo.data;
 
 
+import android.content.Context;
+
+import fgecctv.com.appdemo.data.local.PreferencesHelper;
+import fgecctv.com.appdemo.data.remote.APIService;
+import fgecctv.com.appdemo.data.remote.RetrofitService;
+
 /**
  * @author denghang
  * @version V1.0
@@ -10,19 +16,26 @@ package fgecctv.com.appdemo.data;
  */
 public class DataManager {
 
-    private static DataManager dataManager ;
+    private static DataManager mDataManager;
+    private static APIService mApiService;
+    private static PreferencesHelper mSpHelper;
 
-    private DataManager() {
+    private DataManager(Context context) {
+        mApiService = RetrofitService.getApiService(context);
+        mSpHelper = PreferencesHelper.getInstance(context);
     }
 
-    public static DataManager getInstance() {
-        if (dataManager == null) {
+    public static DataManager getInstance(Context context) {
+        if (mDataManager == null) {
             synchronized (DataManager.class) {
-                if (dataManager == null) {
-                    dataManager = new DataManager();
+                if (mDataManager == null) {
+                    mDataManager = new DataManager(context);
                 }
             }
         }
-        return dataManager;
+        return mDataManager;
     }
+
+
+
 }

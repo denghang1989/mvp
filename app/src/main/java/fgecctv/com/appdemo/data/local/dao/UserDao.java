@@ -11,7 +11,7 @@ import rx.Observable;
  * @Description: (realm 演示demo)
  * @date 2016/5/9 16
  */
-public interface UserDao {
+public interface UserDao extends Dao<User>{
     Observable<User> find(Realm realm);
 
     Observable<User> find(Realm realm, String name);

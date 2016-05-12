@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
+
 /**
  * @author denghang
  * @version V1.0
@@ -19,6 +20,24 @@ public class PreferencesHelper {
      */
     public static final String FILE_NAME = "share_data";
 
+    private static PreferencesHelper mSpHelper;
+    private final SharedPreferences mSp;
+
+    private PreferencesHelper(Context context) {
+        mSp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    }
+
+    public static PreferencesHelper getInstance(Context context) {
+        if (mSpHelper == null) {
+            synchronized (PreferencesHelper.class) {
+                if (mSpHelper == null) {
+                    mSpHelper = new PreferencesHelper(context);
+                }
+            }
+        }
+        return mSpHelper;
+    }
+
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      *
@@ -26,10 +45,9 @@ public class PreferencesHelper {
      * @param key
      * @param object
      */
-    public static void put(Context context, String key, Object object) {
+    public void put(Context context, String key, Object object) {
 
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
+        SharedPreferences.Editor editor = mSp.edit();
 
         if (object instanceof String) {
             editor.putString(key, (String) object);
@@ -56,19 +74,18 @@ public class PreferencesHelper {
      * @param defaultObject
      * @return
      */
-    public static Object get(Context context, String key, Object defaultObject) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public Object get(Context context, String key, Object defaultObject) {
 
         if (defaultObject instanceof String) {
-            return sp.getString(key, (String) defaultObject);
+            return mSp.getString(key, (String) defaultObject);
         } else if (defaultObject instanceof Integer) {
-            return sp.getInt(key, (Integer) defaultObject);
+            return mSp.getInt(key, (Integer) defaultObject);
         } else if (defaultObject instanceof Boolean) {
-            return sp.getBoolean(key, (Boolean) defaultObject);
+            return mSp.getBoolean(key, (Boolean) defaultObject);
         } else if (defaultObject instanceof Float) {
-            return sp.getFloat(key, (Float) defaultObject);
+            return mSp.getFloat(key, (Float) defaultObject);
         } else if (defaultObject instanceof Long) {
-            return sp.getLong(key, (Long) defaultObject);
+            return mSp.getLong(key, (Long) defaultObject);
         }
 
         return null;
@@ -80,9 +97,8 @@ public class PreferencesHelper {
      * @param context
      * @param key
      */
-    public static void remove(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
+    public void remove(Context context, String key) {
+        SharedPreferences.Editor editor = mSp.edit();
         editor.remove(key);
         SharedPreferencesCompat.apply(editor);
     }
@@ -92,9 +108,8 @@ public class PreferencesHelper {
      *
      * @param context
      */
-    public static void clear(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
+    public void clear(Context context) {
+        SharedPreferences.Editor editor = mSp.edit();
         editor.clear();
         SharedPreferencesCompat.apply(editor);
     }
@@ -106,9 +121,8 @@ public class PreferencesHelper {
      * @param key
      * @return
      */
-    public static boolean contains(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE);
-        return sp.contains(key);
+    public boolean contains(Context context, String key) {
+        return mSp.contains(key);
     }
 
     /**
@@ -117,9 +131,8 @@ public class PreferencesHelper {
      * @param context
      * @return
      */
-    public static Map<String, ?> getAll(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE);
-        return sp.getAll();
+    public Map<String, ?> getAll(Context context) {
+        return mSp.getAll();
     }
 
     /**

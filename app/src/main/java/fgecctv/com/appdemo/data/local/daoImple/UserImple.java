@@ -13,6 +13,23 @@ import rx.Observable;
  * @date 2016/5/5 16
  */
 public class UserImple implements UserDao {
+
+    private UserImple() {
+    }
+
+    private static UserImple userImple;
+
+    public static UserImple getInstance() {
+        if (userImple == null) {
+            synchronized (UserImple.class) {
+                if (userImple == null) {
+                    userImple = new UserImple();
+                }
+            }
+        }
+        return userImple;
+    }
+
     @Override
     public Observable<User> find(Realm realm) {
         return realm.where(User.class).findFirst().asObservable();
@@ -20,7 +37,7 @@ public class UserImple implements UserDao {
 
     @Override
     public Observable<User> find(Realm realm, String name) {
-        return realm.where(User.class).equalTo("name",name).findFirst().asObservable();
+        return realm.where(User.class).equalTo("name", name).findFirst().asObservable();
     }
 
     @Override
