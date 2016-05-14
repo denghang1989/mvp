@@ -1,4 +1,4 @@
-package fgecctv.com.appdemo.data.model.table;
+package fgecctv.com.appdemo.data.model.bean;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
@@ -6,7 +6,7 @@ import io.realm.annotations.Ignore;
 /**
  * @author denghang
  * @version V1.0
- * @Package fgecctv.com.appdemo.data.model.table
+ * @Package fgecctv.com.appdemo.data.model.bean
  * @Description: (demo 演示 realm)
  * @date 2016/5/5 15
  */

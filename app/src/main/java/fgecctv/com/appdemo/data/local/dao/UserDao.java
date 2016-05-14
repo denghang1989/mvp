@@ -1,6 +1,6 @@
 package fgecctv.com.appdemo.data.local.dao;
 
-import fgecctv.com.appdemo.data.model.table.User;
+import fgecctv.com.appdemo.data.model.bean.User;
 import io.realm.Realm;
 import rx.Observable;
 

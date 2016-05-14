@@ -21,7 +21,7 @@ public class PreferencesHelper {
     public static final String FILE_NAME = "share_data";
 
     private static PreferencesHelper mSpHelper;
-    private final SharedPreferences mSp;
+    private final  SharedPreferences mSp;
 
     private PreferencesHelper(Context context) {
         mSp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
