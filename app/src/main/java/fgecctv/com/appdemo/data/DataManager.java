@@ -39,8 +39,4 @@ public class DataManager {
         return mDataManager;
     }
 
-
-
-
-
 }
