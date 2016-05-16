@@ -39,8 +39,7 @@ public abstract class OnRecyclerItemClickListener implements RecyclerView.OnItem
             View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
             if (child != null) {
                 RecyclerView.ViewHolder vh = recyclerView.getChildViewHolder(child);
-                int position = recyclerView.getChildAdapterPosition(child);
-                onItemClick(vh, position);
+                onItemClick(vh,vh.getAdapterPosition());
             }
             return true;
         }
