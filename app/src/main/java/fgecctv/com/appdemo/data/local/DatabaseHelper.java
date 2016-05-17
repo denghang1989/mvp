@@ -1,9 +1,5 @@
 package fgecctv.com.appdemo.data.local;
 
-import fgecctv.com.appdemo.data.local.dao.Dao;
-import fgecctv.com.appdemo.data.local.daoImple.UserImpl;
-import fgecctv.com.appdemo.data.model.bean.User;
-
 /**
  * @author denghang
  * @version V1.0
@@ -27,10 +23,6 @@ public class DatabaseHelper {
             }
         }
         return mDatabaseHelper;
-    }
-
-    public Dao<User> getUser() {
-        return UserImpl.getInstance();
     }
 
 }

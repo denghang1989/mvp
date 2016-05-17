@@ -5,8 +5,12 @@ import android.content.Context;
 
 import fgecctv.com.appdemo.data.local.DatabaseHelper;
 import fgecctv.com.appdemo.data.local.PreferencesHelper;
+import fgecctv.com.appdemo.data.model.bean.Weather;
+import fgecctv.com.appdemo.data.model.pojo.WeatherDataBean;
 import fgecctv.com.appdemo.data.remote.APIService;
 import fgecctv.com.appdemo.data.remote.RetrofitService;
+import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * @author denghang
@@ -37,6 +41,22 @@ public class DataManager {
             }
         }
         return mDataManager;
+    }
+
+    public Observable<Weather> getWeather(String city) {
+        return mApiService.getWeatherByCity(city).map(new Func1<WeatherDataBean, Weather>() {
+            @Override
+            public Weather call(WeatherDataBean weatherDataBean) {
+                Weather weather = new Weather();
+                weather.setCity(weatherDataBean.getRetData().getCity());
+                weather.setH_tmp(weatherDataBean.getRetData().getH_tmp());
+                weather.setL_tmp(weatherDataBean.getRetData().getL_tmp());
+                weather.setTemp(weatherDataBean.getRetData().getTemp());
+                weather.setWeather(weatherDataBean.getRetData().getWeather());
+                // TODO: 2016/5/17  是否需要存储数据库
+                return weather;
+            }
+        });
     }
 
 }

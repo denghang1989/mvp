@@ -1,5 +1,7 @@
 package fgecctv.com.appdemo.base;
 
+import android.support.annotation.NonNull;
+
 /**
  * @author denghang
  * @version V1.0
@@ -8,5 +10,5 @@ package fgecctv.com.appdemo.base;
  * @date 2016/5/6 15
  */
 public interface BaseView<T> {
-    void setPresent(T present);
+    void setPresent(@NonNull T present);
 }
