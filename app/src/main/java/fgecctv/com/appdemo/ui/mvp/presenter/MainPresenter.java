@@ -3,12 +3,7 @@ package fgecctv.com.appdemo.ui.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import fgecctv.com.appdemo.data.DataManager;
-import fgecctv.com.appdemo.data.model.bean.Weather;
 import fgecctv.com.appdemo.ui.mvp.contract.MainContract;
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -22,6 +17,7 @@ public class MainPresenter implements MainContract.Presenter {
     private CompositeSubscription mSubscriptions;
     private MainContract.View     mView;
     private DataManager           mDataManager;
+    private boolean               isFirstLoad;
 
     public MainPresenter(@NonNull DataManager dataManager, @NonNull MainContract.View view) {
         mSubscriptions = new CompositeSubscription();
@@ -32,10 +28,10 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void subscribe() {
-        loadData();
+        loadData(isFirstLoad);
     }
 
-    @Override
+    /*@Override
     public void loadData() {
         mSubscriptions.clear();
         Subscription subscription = mDataManager.getWeather(mView.getCity()).
@@ -58,10 +54,15 @@ public class MainPresenter implements MainContract.Presenter {
                     }
                 });
         mSubscriptions.add(subscription);
-    }
+    }*/
 
     @Override
     public void unsubscribe() {
         mSubscriptions.clear();
+    }
+
+    @Override
+    public void loadData(boolean load) {
+
     }
 }

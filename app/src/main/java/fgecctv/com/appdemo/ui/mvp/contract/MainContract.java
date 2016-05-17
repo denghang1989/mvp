@@ -20,7 +20,7 @@ public interface MainContract {
     }
 
     interface Presenter extends BasePresent {
-        void loadData();
+        void loadData(boolean load);
     }
 
 }
