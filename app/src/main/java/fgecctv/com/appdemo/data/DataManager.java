@@ -3,6 +3,9 @@ package fgecctv.com.appdemo.data;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+
+import fgecctv.com.appdemo.config.SPConfig;
 import fgecctv.com.appdemo.data.local.DatabaseHelper;
 import fgecctv.com.appdemo.data.local.PreferencesHelper;
 import fgecctv.com.appdemo.data.model.bean.Weather;
@@ -10,6 +13,7 @@ import fgecctv.com.appdemo.data.model.pojo.WeatherDataBean;
 import fgecctv.com.appdemo.data.remote.APIService;
 import fgecctv.com.appdemo.data.remote.RetrofitService;
 import rx.Observable;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 /**
@@ -53,8 +57,12 @@ public class DataManager {
                 weather.setL_tmp(weatherDataBean.getRetData().getL_tmp());
                 weather.setTemp(weatherDataBean.getRetData().getTemp());
                 weather.setWeather(weatherDataBean.getRetData().getWeather());
-                // TODO: 2016/5/17  是否需要存储数据库
                 return weather;
+            }
+        }).doOnNext(new Action1<Weather>() {
+            @Override
+            public void call(Weather weather) {
+                mSpHelper.put(SPConfig.WEATHER,new Gson().toJson(weather));
             }
         });
     }

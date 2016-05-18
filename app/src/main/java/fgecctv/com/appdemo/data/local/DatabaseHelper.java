@@ -1,5 +1,7 @@
 package fgecctv.com.appdemo.data.local;
 
+import fgecctv.com.appdemo.data.local.daoImple.WeatherImple;
+
 /**
  * @author denghang
  * @version V1.0
@@ -23,6 +25,10 @@ public class DatabaseHelper {
             }
         }
         return mDatabaseHelper;
+    }
+
+    public WeatherImple getWeatherService() {
+        return new WeatherImple();
     }
 
 }

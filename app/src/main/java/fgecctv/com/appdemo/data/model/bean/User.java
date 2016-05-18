@@ -1,6 +1,5 @@
 package fgecctv.com.appdemo.data.model.bean;
 
-import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 
 /**
@@ -10,7 +9,7 @@ import io.realm.annotations.Ignore;
  * @Description: (demo 演示 realm)
  * @date 2016/5/5 15
  */
-public class User extends RealmObject {
+public class User extends BaseData {
     private String name;
     private int    age;
     private String imageUrl;

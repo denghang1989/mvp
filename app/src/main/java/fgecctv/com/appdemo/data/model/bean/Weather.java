@@ -1,7 +1,5 @@
 package fgecctv.com.appdemo.data.model.bean;
 
-import io.realm.RealmObject;
-
 /**
  * @author denghang
  * @version V1.0
@@ -9,13 +7,14 @@ import io.realm.RealmObject;
  * @Description: (用一句话描述该文件做什么)
  * @date 2016/5/17 12
  */
-public class Weather extends RealmObject{
+public class Weather extends BaseData {
     private String city;
     private String weather;
     private String temp;
-    private String l_tmp;
-    private String h_tmp;
+    private String l_tmp; // 最低温度
+    private String h_tmp; // 最高温度
     private String pm25;
+    private String humiture; // 温湿度
 
     public String getCity() {
         return city;
@@ -63,5 +62,25 @@ public class Weather extends RealmObject{
 
     public void setPm25(String pm25) {
         this.pm25 = pm25;
+    }
+
+    public String getHumiture() {
+        return humiture;
+    }
+
+    public void setHumiture(String humiture) {
+        this.humiture = humiture;
+    }
+
+    @Override
+    public String toString() {
+        return "Weather{" +
+                "city='" + city + '\'' +
+                ", weather='" + weather + '\'' +
+                ", temp='" + temp + '\'' +
+                ", l_tmp='" + l_tmp + '\'' +
+                ", h_tmp='" + h_tmp + '\'' +
+                ", pm25='" + pm25 + '\'' +
+                '}';
     }
 }

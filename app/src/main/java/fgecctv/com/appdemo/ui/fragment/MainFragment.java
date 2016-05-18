@@ -74,7 +74,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @Override
     public String getCity() {
-        return null;
+        return "beijing";
     }
 
     @Override

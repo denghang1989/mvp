@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import fgecctv.com.appdemo.R;
+import fgecctv.com.appdemo.data.DataManager;
 import fgecctv.com.appdemo.ui.fragment.MainFragment;
+import fgecctv.com.appdemo.ui.mvp.presenter.MainPresenter;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
+    private MainPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_main,fragment).commit();
         }
 
+        mPresenter = new MainPresenter(DataManager.getInstance(getApplicationContext()),fragment);
 
     }
 }

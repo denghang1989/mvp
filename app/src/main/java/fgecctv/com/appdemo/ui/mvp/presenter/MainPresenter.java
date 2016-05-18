@@ -1,9 +1,15 @@
 package fgecctv.com.appdemo.ui.mvp.presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import fgecctv.com.appdemo.data.DataManager;
+import fgecctv.com.appdemo.data.model.bean.Weather;
 import fgecctv.com.appdemo.ui.mvp.contract.MainContract;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -18,6 +24,7 @@ public class MainPresenter implements MainContract.Presenter {
     private MainContract.View     mView;
     private DataManager           mDataManager;
     private boolean               isFirstLoad;
+    private static final String TAG = "MainPresenter";
 
     public MainPresenter(@NonNull DataManager dataManager, @NonNull MainContract.View view) {
         mSubscriptions = new CompositeSubscription();
@@ -31,7 +38,6 @@ public class MainPresenter implements MainContract.Presenter {
         loadData(isFirstLoad);
     }
 
-    /*@Override
     public void loadData() {
         mSubscriptions.clear();
         Subscription subscription = mDataManager.getWeather(mView.getCity()).
@@ -45,24 +51,29 @@ public class MainPresenter implements MainContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d(TAG, "onError: onError");
                     }
 
                     @Override
                     public void onNext(Weather weather) {
-
+                        mView.showPm25(weather.getPm25());
+                        mView.showTemp(weather.getTemp());
                     }
                 });
         mSubscriptions.add(subscription);
-    }*/
+    }
 
     @Override
     public void unsubscribe() {
         mSubscriptions.clear();
+        mSubscriptions.unsubscribe();
     }
 
     @Override
     public void loadData(boolean load) {
-
+        if (!isFirstLoad) {
+            loadData();
+        }
+        isFirstLoad = false;
     }
 }

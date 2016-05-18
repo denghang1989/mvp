@@ -13,6 +13,24 @@ import rx.Observable;
  * @date 2016/5/17 14
  */
 public class WeatherImple implements WeatherDao {
+
+
+    private static WeatherImple weatherImple;
+
+    private WeatherImple() {
+    }
+
+    public static WeatherImple getWeatherImple() {
+        if (weatherImple == null) {
+            synchronized (WeatherImple.class) {
+                if (weatherImple == null) {
+                    weatherImple = new WeatherImple();
+                }
+            }
+        }
+        return weatherImple;
+    }
+
     @Override
     public Observable<Weather> find(Realm realm) {
         realm.beginTransaction();
