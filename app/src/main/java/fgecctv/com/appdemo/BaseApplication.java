@@ -2,6 +2,13 @@ package fgecctv.com.appdemo;
 
 import android.app.Application;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
+import com.bumptech.glide.load.model.GlideUrl;
+
+import java.io.InputStream;
+
+import fgecctv.com.appdemo.data.remote.OkHttpHelper;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -18,6 +25,14 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initRealm();
+        initGlide();
+    }
+
+    /**
+     * 初始化glide数据库
+     */
+    private void initGlide() {
+        Glide.get(this).register(GlideUrl.class,InputStream.class,new OkHttpUrlLoader.Factory(OkHttpHelper.createClient(getApplicationContext())));
     }
 
     /**
