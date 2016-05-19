@@ -63,6 +63,7 @@ public class DataManager {
             @Override
             public void call(Weather weather) {
                 mSpHelper.put(SPConfig.WEATHER,new Gson().toJson(weather));
+
             }
         });
     }

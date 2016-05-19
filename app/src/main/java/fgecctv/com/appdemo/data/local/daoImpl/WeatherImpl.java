@@ -1,4 +1,4 @@
-package fgecctv.com.appdemo.data.local.daoImple;
+package fgecctv.com.appdemo.data.local.daoImpl;
 
 import fgecctv.com.appdemo.data.local.dao.WeatherDao;
 import fgecctv.com.appdemo.data.model.bean.Weather;
@@ -12,19 +12,19 @@ import rx.Observable;
  * @Description: (用一句话描述该文件做什么)
  * @date 2016/5/17 14
  */
-public class WeatherImple implements WeatherDao {
+public class WeatherImpl implements WeatherDao {
 
 
-    private static WeatherImple weatherImple;
+    private static WeatherImpl weatherImple;
 
-    private WeatherImple() {
+    private WeatherImpl() {
     }
 
-    public static WeatherImple getWeatherImple() {
+    public static WeatherImpl getWeatherImple() {
         if (weatherImple == null) {
-            synchronized (WeatherImple.class) {
+            synchronized (WeatherImpl.class) {
                 if (weatherImple == null) {
-                    weatherImple = new WeatherImple();
+                    weatherImple = new WeatherImpl();
                 }
             }
         }

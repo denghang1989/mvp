@@ -1,6 +1,6 @@
 package fgecctv.com.appdemo.data.local;
 
-import fgecctv.com.appdemo.data.local.daoImple.WeatherImple;
+import fgecctv.com.appdemo.data.local.daoImpl.WeatherImpl;
 
 /**
  * @author denghang
@@ -27,8 +27,13 @@ public class DatabaseHelper {
         return mDatabaseHelper;
     }
 
+<<<<<<< 04d46aaf230b1537ed4472b7c02b114e42f33f16
     public WeatherImple getWeatherService() {
         return WeatherImple.getWeatherImple();
+=======
+    public WeatherImpl getWeatherService() {
+        return WeatherImpl.getWeatherImple();
+>>>>>>> 谁便写点东西
     }
 
 }

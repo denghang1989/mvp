@@ -17,7 +17,10 @@ public class BaseActivity extends AutoLayoutActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< 04d46aaf230b1537ed4472b7c02b114e42f33f16
 
+=======
+>>>>>>> 谁便写点东西
     }
 
     @Override

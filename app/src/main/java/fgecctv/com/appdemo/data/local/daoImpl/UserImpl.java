@@ -1,4 +1,4 @@
-package fgecctv.com.appdemo.data.local.daoImple;
+package fgecctv.com.appdemo.data.local.daoImpl;
 
 import fgecctv.com.appdemo.data.local.dao.UserDao;
 import fgecctv.com.appdemo.data.model.bean.User;
