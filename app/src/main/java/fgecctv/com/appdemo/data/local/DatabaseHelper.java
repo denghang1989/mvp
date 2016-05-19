@@ -28,7 +28,7 @@ public class DatabaseHelper {
     }
 
     public WeatherImple getWeatherService() {
-        return new WeatherImple();
+        return WeatherImple.getWeatherImple();
     }
 
 }

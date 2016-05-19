@@ -1,5 +1,7 @@
 package fgecctv.com.appdemo.data.model.bean;
 
+import io.realm.RealmObject;
+
 /**
  * @author denghang
  * @version V1.0
@@ -7,7 +9,7 @@ package fgecctv.com.appdemo.data.model.bean;
  * @Description: (用一句话描述该文件做什么)
  * @date 2016/5/17 12
  */
-public class Weather extends BaseData {
+public class Weather extends RealmObject {
     private String city;
     private String weather;
     private String temp;
