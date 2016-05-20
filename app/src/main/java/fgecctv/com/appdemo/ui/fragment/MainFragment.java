@@ -1,17 +1,15 @@
 package fgecctv.com.appdemo.ui.fragment;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import fgecctv.com.appdemo.R;
+import fgecctv.com.appdemo.base.BaseFragment;
+import fgecctv.com.appdemo.base.BasePresent;
+import fgecctv.com.appdemo.data.DataManager;
 import fgecctv.com.appdemo.ui.mvp.contract.MainContract;
+import fgecctv.com.appdemo.ui.mvp.presenter.MainPresenter;
 import fgecctv.com.appdemo.utils.WeatherUtils;
 
 /**
@@ -21,39 +19,20 @@ import fgecctv.com.appdemo.utils.WeatherUtils;
  * @Description: (用一句话描述该文件做什么)
  * @date 2016/5/17 15
  */
-public class MainFragment extends Fragment implements MainContract.View {
+public class MainFragment extends BaseFragment implements MainContract.View {
 
-    private TextView mHumidity;
-    private TextView mPm25;
-    private TextView mTemp;
-    private Context  mContext;
-    private ImageView mIcon;
-    private MainContract.Presenter mPresenter;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
-    }
+    @BindView(R.id.textView_humidity)
+    TextView  mHumidity;
+    @BindView(R.id.textView_pm25)
+    TextView  mPm25;
+    @BindView(R.id.textView_temp)
+    TextView  mTemp;
+    @BindView(R.id.imageView_icon)
+    ImageView mIcon;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mHumidity = (TextView) view.findViewById(R.id.textView_humidity);
-        mPm25 = (TextView) view.findViewById(R.id.textView_pm25);
-        mTemp = (TextView) view.findViewById(R.id.textView_temp);
-        mIcon = (ImageView) view.findViewById(R.id.imageView_icon);
+    protected BasePresent getPresent() {
+        return new MainPresenter(DataManager.getInstance(getHoldingActivity()), this);
     }
 
     @Override
@@ -66,6 +45,11 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void onPause() {
         super.onPause();
         mPresenter.unsubscribe();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_main;
     }
 
     public static MainFragment newInstance() {
@@ -97,8 +81,4 @@ public class MainFragment extends Fragment implements MainContract.View {
         mHumidity.setText(humidity);
     }
 
-    @Override
-    public void setPresent(MainContract.Presenter present) {
-        mPresenter = present;
-    }
 }

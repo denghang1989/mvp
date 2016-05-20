@@ -30,7 +30,6 @@ public class MainPresenter implements MainContract.Presenter {
         mSubscriptions = new CompositeSubscription();
         mView = view;
         mDataManager = dataManager;
-        mView.setPresent(this);
     }
 
     @Override

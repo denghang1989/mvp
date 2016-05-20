@@ -1,30 +1,30 @@
 package fgecctv.com.appdemo.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import fgecctv.com.appdemo.R;
-import fgecctv.com.appdemo.data.DataManager;
+import fgecctv.com.appdemo.base.BaseActivity;
+import fgecctv.com.appdemo.base.BaseFragment;
 import fgecctv.com.appdemo.ui.fragment.MainFragment;
-import fgecctv.com.appdemo.ui.mvp.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
-
-    private MainPresenter mPresenter;
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        MainFragment fragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.frameLayout_main);
-        if (fragment == null) {
-            fragment = MainFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_main,fragment).commit();
+        BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(getFragmentContentId());
+        if (null == fragment) {
+            addFragment(MainFragment.newInstance());
         }
+    }
 
-        mPresenter = new MainPresenter(DataManager.getInstance(getApplicationContext()),fragment);
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    protected int getFragmentContentId() {
+        return R.id.frameLayout_main;
     }
 }

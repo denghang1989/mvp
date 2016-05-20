@@ -11,7 +11,7 @@ import fgecctv.com.appdemo.base.BaseView;
  * @date 2016/5/17 15
  */
 public interface MainContract {
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
         String getCity();
         void showTemp(String temp);
         void showPm25(String pm25);
