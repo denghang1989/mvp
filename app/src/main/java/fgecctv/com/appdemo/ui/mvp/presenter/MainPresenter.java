@@ -1,7 +1,6 @@
 package fgecctv.com.appdemo.ui.mvp.presenter;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import fgecctv.com.appdemo.data.DataManager;
 import fgecctv.com.appdemo.data.model.bean.Weather;
@@ -50,12 +49,11 @@ public class MainPresenter implements MainContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, "onError: onError");
+                        e.printStackTrace();
                     }
 
                     @Override
                     public void onNext(Weather weather) {
-                        mView.showPm25(weather.getPm25());
                         mView.showTemp(weather.getTemp());
                     }
                 });

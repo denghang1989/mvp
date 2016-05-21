@@ -4,12 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -26,6 +26,7 @@ public abstract class BaseFragment extends Fragment {
     protected InputMethodManager mIMM;
     protected boolean            mNeedHideSoft;
     protected BasePresent        mPresenter;
+    private static final String TAG = "BaseFragment";
 
     @Override
     public void onAttach(Context context) {
@@ -35,6 +36,7 @@ public abstract class BaseFragment extends Fragment {
         } else {
             throw new ClassCastException(context.toString() + "必须继承BaseActivity");
         }
+        Log.d(TAG, "onAttach: ");
     }
 
     @Override
@@ -42,21 +44,23 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mIMM = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
         mPresenter = getPresent();
+        Log.d(TAG, "onCreate: ");
     }
-
-    protected abstract BasePresent getPresent();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(getLayoutId(), container, false);
-        mUnbinder = ButterKnife.bind(this, rootView);
+/*        mUnbinder = ButterKnife.bind(this, rootView);
+        Log.d(TAG, "onCreateView: ");*/
         return rootView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.subscribe();
+        Log.d(TAG, "onResume: ");
     }
 
     @Override
@@ -65,13 +69,18 @@ public abstract class BaseFragment extends Fragment {
         if (mNeedHideSoft) {
             hideKeyboard();
         }
+        mPresenter.unsubscribe();
+        Log.d(TAG, "onPause: ");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mUnbinder.unbind();
+//        mUnbinder.unbind();
+        Log.d(TAG, "onDestroyView: ");
     }
+
+    protected abstract BasePresent getPresent();
 
     /**
      * @return
