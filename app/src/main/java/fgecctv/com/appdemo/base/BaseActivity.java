@@ -8,6 +8,8 @@ import android.view.KeyEvent;
 
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.util.List;
+
 /**
  * @author denghang
  * @version V1.0
@@ -23,22 +25,32 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         setContentView(getContentViewId());
     }
 
-    /*根布局*/
+
+    /**
+     * @return
+     * @desc 根布局
+     */
     protected abstract int getContentViewId();
 
-    /*布局中FrameLayout的Id*/
+    /**
+     * @return
+     * @desc 布局中FrameLayout的Id
+     */
     protected abstract int getFragmentContentId();
 
-    /*添加Fragment*/
-    public void addFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .add(getFragmentContentId(), fragment, fragment.getClass().getSimpleName())
-                .addToBackStack(fragment.getClass().getSimpleName())
-                .commit();
+
+    /**
+     * @param fragment
+     * @desc 布局中FrameLayout的Id
+     */
+    protected void addFragment(BaseFragment fragment) {
+        start(getTopFragment(),fragment);
     }
 
-    /*移除栈顶Fragment*/
-    public void removeFragment() {
+    /**
+     * @desc:移除栈顶Fragment
+     */
+    protected void removeFragment() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             getSupportFragmentManager().popBackStack();
         } else {
@@ -60,4 +72,37 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    /**
+     * @param fromFragment 栈顶的fragment
+     * @param toFragment   需要加入的fragment
+     */
+    private void start(BaseFragment fromFragment, BaseFragment toFragment) {
+        String toName = toFragment.getClass().getSimpleName();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .add(getFragmentContentId(), toFragment, toName);
+        if (fromFragment != null) {
+            ft.hide(fromFragment);
+        }
+        ft.addToBackStack(toName);
+        ft.commit();
+    }
+
+    /**
+     * @return
+     * @dec:返回栈顶的fragment
+     */
+    private BaseFragment getTopFragment() {
+        List<Fragment> list = getSupportFragmentManager().getFragments();
+        if (list != null) {
+            for (int i = list.size() - 1; i >= 0; i--) {
+                Fragment fragment = list.get(i);
+                if (fragment instanceof BaseFragment) {
+                    return (BaseFragment) fragment;
+                }
+            }
+        }
+        return null;
+    }
+
 }
