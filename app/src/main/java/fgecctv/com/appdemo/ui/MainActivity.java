@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import fgecctv.com.appdemo.R;
 import fgecctv.com.appdemo.base.BaseActivity;
-import fgecctv.com.appdemo.base.BaseFragment;
 import fgecctv.com.appdemo.ui.fragment.MainFragment;
 
 public class MainActivity extends BaseActivity {
@@ -12,8 +11,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(getFragmentContentId());
-        if (null == fragment) {
+
+        if (null == savedInstanceState) {
             addFragment(MainFragment.newInstance());
         }
     }
@@ -27,4 +26,6 @@ public class MainActivity extends BaseActivity {
     protected int getFragmentContentId() {
         return R.id.frameLayout_main;
     }
+
+
 }

@@ -25,7 +25,6 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         setContentView(getContentViewId());
     }
 
-
     /**
      * @return
      * @desc 根布局
@@ -37,7 +36,6 @@ public abstract class BaseActivity extends AutoLayoutActivity {
      * @desc 布局中FrameLayout的Id
      */
     protected abstract int getFragmentContentId();
-
 
     /**
      * @param fragment
