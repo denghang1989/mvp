@@ -39,7 +39,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     }
 
     @Override
-    protected MainPresenter getPresent() {
+    protected MainPresenter getPresenter() {
         return new MainPresenter(DataManager.getInstance(getHoldingActivity()), this);
     }
 
