@@ -41,14 +41,14 @@ public abstract class BaseActivity extends AutoLayoutActivity {
      * @param fragment
      * @desc 布局中FrameLayout的Id
      */
-    protected void addFragment(BaseFragment fragment) {
+    public void addFragment(BaseFragment fragment) {
         start(getTopFragment(),fragment);
     }
 
     /**
      * @desc:移除栈顶Fragment
      */
-    protected void removeFragment() {
+    public void removeFragment() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             getSupportFragmentManager().popBackStack();
         } else {
