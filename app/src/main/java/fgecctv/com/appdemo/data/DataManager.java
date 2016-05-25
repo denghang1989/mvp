@@ -89,4 +89,8 @@ public class DataManager {
         });
     }
 
+    public Observable<User> getUserInfor() {
+        return null;
+    }
+
 }
