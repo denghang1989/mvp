@@ -8,10 +8,13 @@ import com.google.gson.Gson;
 import fgecctv.com.appdemo.config.SPConfig;
 import fgecctv.com.appdemo.data.local.DatabaseHelper;
 import fgecctv.com.appdemo.data.local.PreferencesHelper;
+import fgecctv.com.appdemo.data.model.bean.User;
 import fgecctv.com.appdemo.data.model.bean.Weather;
+import fgecctv.com.appdemo.data.model.pojo.LoginResponse;
 import fgecctv.com.appdemo.data.model.pojo.WeatherDataBean;
 import fgecctv.com.appdemo.data.remote.APIService;
 import fgecctv.com.appdemo.data.remote.RetrofitService;
+import io.realm.Realm;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -30,17 +33,17 @@ public class DataManager {
     private static PreferencesHelper mSpHelper;
     private static DatabaseHelper mDbHelper;
 
-    private DataManager(Context context) {
+    private DataManager(Context context,Realm realm) {
         mApiService = RetrofitService.getApiService(context);
         mSpHelper = PreferencesHelper.getInstance(context);
-        mDbHelper = DatabaseHelper.getInstance();
+        mDbHelper = DatabaseHelper.getInstance(realm);
     }
 
-    public static DataManager getInstance(Context context) {
+    public static DataManager getInstance(Context context,Realm realm) {
         if (mDataManager == null) {
             synchronized (DataManager.class) {
                 if (mDataManager == null) {
-                    mDataManager = new DataManager(context);
+                    mDataManager = new DataManager(context,realm);
                 }
             }
         }
@@ -63,6 +66,25 @@ public class DataManager {
             @Override
             public void call(Weather weather) {
                 mSpHelper.put(SPConfig.WEATHER,new Gson().toJson(weather));
+            }
+        });
+    }
+    
+    public Observable<User> getUserInfo() {
+        return mDbHelper.getUserInfo().map(new Func1<User, User>() {
+            @Override
+            public User call(User user) {
+                // TODO: 2016/5/25
+                return user!=null?user:null;
+            }
+        });
+    }
+
+    public Observable<LoginResponse> login(String id,String passward) {
+        return mApiService.login(id,passward).doOnNext(new Action1<LoginResponse>() {
+            @Override
+            public void call(LoginResponse loginResponse) {
+                mDbHelper.saveUserInfo(loginResponse.getUser());
             }
         });
     }

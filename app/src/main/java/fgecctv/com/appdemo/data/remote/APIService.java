@@ -1,9 +1,13 @@
 package fgecctv.com.appdemo.data.remote;
 
 import fgecctv.com.appdemo.data.model.pojo.FourDayWeather;
+import fgecctv.com.appdemo.data.model.pojo.LoginResponse;
 import fgecctv.com.appdemo.data.model.pojo.WeatherDataBean;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -29,5 +33,8 @@ public interface APIService {
     @GET("http://apis.baidu.com/apistore/weatherservice/recentweathers")
     Observable<FourDayWeather> get4dayWeatherDataByCity(@Query("cityname") String city);
 
-
+    /*登入*/
+    @FormUrlEncoded
+    @POST("http://apis.baidu.com/apistore/weatherservice/recentweathers")
+    Observable<LoginResponse> login(@Field("useid") String useid,@Field("passward") String passward);
 }

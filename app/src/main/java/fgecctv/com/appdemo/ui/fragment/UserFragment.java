@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,7 @@ public class UserFragment extends BaseFragment implements UserContract.View{
 
     @Override
     protected BasePresent getPresenter() {
-        return new UserPresenter(DataManager.getInstance(getHoldingActivity()),this);
+        return new UserPresenter(DataManager.getInstance(mActivity,mRealm),this);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class UserFragment extends BaseFragment implements UserContract.View{
         mListView.addOnItemTouchListener(new OnRecyclerItemClickListener(mListView) {
             @Override
             public void onItemClick(RecyclerView.ViewHolder vh, int position) {
-
+                Toast.makeText(getContext(), position, Toast.LENGTH_SHORT).show();
             }
         });
     }

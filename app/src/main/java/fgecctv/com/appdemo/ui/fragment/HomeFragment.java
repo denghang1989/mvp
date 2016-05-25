@@ -21,7 +21,7 @@ import fgecctv.com.appdemo.ui.mvp.presenter.HomePresenter;
 public class HomeFragment extends BaseFragment implements HomeContract.View{
     @Override
     protected BasePresent getPresenter() {
-        return new HomePresenter(DataManager.getInstance(mActivity),this);
+        return new HomePresenter(DataManager.getInstance(mActivity,mRealm),this);
     }
 
     @Override

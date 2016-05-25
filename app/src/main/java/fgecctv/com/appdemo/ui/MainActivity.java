@@ -11,7 +11,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (null == savedInstanceState) {
             addFragment(MainFragment.newInstance());
         }
@@ -26,6 +25,4 @@ public class MainActivity extends BaseActivity {
     protected int getFragmentContentId() {
         return R.id.frameLayout_main;
     }
-
-
 }

@@ -3,7 +3,10 @@ package fgecctv.com.appdemo.ui.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import fgecctv.com.appdemo.data.DataManager;
+import fgecctv.com.appdemo.data.model.bean.User;
 import fgecctv.com.appdemo.ui.mvp.contract.UserContract;
+import rx.Observer;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -52,6 +55,28 @@ public class UserPresenter implements UserContract.Presenter {
     @Override
     public void subscribe() {
         mSubscription.clear();
+        load();
+    }
+
+    private void load() {
+        Subscription subscribe = mDataManager.getUserInfo().
+                subscribe(new Observer<User>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(User user) {
+                mView.showUserInfo(user);
+            }
+        });
+        mSubscription.add(subscribe);
     }
 
     @Override

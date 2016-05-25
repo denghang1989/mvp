@@ -40,7 +40,7 @@ public class MainFragment extends BaseFragment implements MainContract.View ,Vie
 
     @Override
     protected MainPresenter getPresenter() {
-        return new MainPresenter(DataManager.getInstance(getHoldingActivity()), this);
+        return new MainPresenter(DataManager.getInstance(mActivity,mRealm), this);
     }
 
     @Override
