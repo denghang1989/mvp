@@ -15,7 +15,7 @@ import fgecctv.com.appdemo.ui.mvp.presenter.HomePresenter;
  * @author denghang
  * @version V1.0
  * @Package fgecctv.com.appdemo.ui.fragment
- * @Description: (用一句话描述该文件做什么)
+ * @Description: (主界面)
  * @date 2016/5/22 15
  */
 public class HomeFragment extends BaseFragment implements HomeContract.View{

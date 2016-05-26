@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_info">
+        <item>绑定号码</item>
+        <item>修改密码</item>
+        <item>呢称</item>
+        <item>性别</item>
+        <item>地址</item>
+    </string-array>
+</resources>

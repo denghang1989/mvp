@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import fgecctv.com.appdemo.R;
@@ -25,7 +26,7 @@ import fgecctv.com.appdemo.utils.ImageLoader;
  * @author denghang
  * @version V1.0
  * @Package fgecctv.com.appdemo.ui.fragment
- * @Description: (用一句话描述该文件做什么)
+ * @Description: (用户信息的Fragment)
  * @date 2016/5/24 16
  */
 public class UserFragment extends BaseFragment implements UserContract.View {
@@ -52,7 +53,7 @@ public class UserFragment extends BaseFragment implements UserContract.View {
         mAdapter = new CommonAdapter<String>(getHoldingActivity(), R.layout.item_user, new ArrayList<String>(0)) {
             @Override
             public void convert(ViewHolder holder, String s) {
-
+                holder.setText(R.id.textView_title,s);
             }
         };
         mListView.setAdapter(mAdapter);
@@ -92,7 +93,8 @@ public class UserFragment extends BaseFragment implements UserContract.View {
     @Override
     public void showUserInfo(User user) {
         mListView.setVisibility(View.VISIBLE);
-        mAdapter.replaceData(null);
+        String[] array = getContext().getResources().getStringArray(R.array.user_info);
+        mAdapter.replaceData(Arrays.asList(array));
     }
 
 }
