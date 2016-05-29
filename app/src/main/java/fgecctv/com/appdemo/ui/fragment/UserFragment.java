@@ -28,7 +28,7 @@ import fgecctv.com.appdemo.utils.ImageLoader;
  * @Description: (用一句话描述该文件做什么)
  * @date 2016/5/24 16
  */
-public class UserFragment extends BaseFragment implements UserContract.View{
+public class UserFragment extends BaseFragment implements UserContract.View {
 
     private CircleImageView mAvatar;
     private RecyclerView mListView;
@@ -36,7 +36,7 @@ public class UserFragment extends BaseFragment implements UserContract.View{
 
     @Override
     protected BasePresent getPresenter() {
-        return new UserPresenter(DataManager.getInstance(mActivity,mRealm),this);
+        return new UserPresenter(DataManager.getInstance(mActivity, mRealm), this);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserFragment extends BaseFragment implements UserContract.View{
         super.onViewCreated(view, savedInstanceState);
         mAvatar = (CircleImageView) view.findViewById(R.id.avatar_image);
         mListView = (RecyclerView) view.findViewById(R.id.user_list);
-        mAdapter = new CommonAdapter<String>(getHoldingActivity(), R.layout.item_user,new ArrayList<String>(0)) {
+        mAdapter = new CommonAdapter<String>(getHoldingActivity(), R.layout.item_user, new ArrayList<String>(0)) {
             @Override
             public void convert(ViewHolder holder, String s) {
 
@@ -62,12 +62,31 @@ public class UserFragment extends BaseFragment implements UserContract.View{
                 Toast.makeText(getContext(), position, Toast.LENGTH_SHORT).show();
             }
         });
+        mListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                switch (newState) {
+                    case RecyclerView.SCROLL_STATE_DRAGGING: // 手指滑动
+                        // TODO: 2016/5/28   设置adapter 里面的滚动的标记  静止加载图片
+                        break;
+                    case RecyclerView.SCROLL_STATE_IDLE: // 停止
+                        // TODO: 2016/5/28  设置adapter 里面滚动的标记 开始加载图片
+                        break;
+                    case RecyclerView.SCROLL_STATE_SETTLING: // 屏幕滚动
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
     }
 
     @Override
     public void showAvatar(String file) {
         mAvatar.setVisibility(View.VISIBLE);
-        ImageLoader.display(this,file,mAvatar);
+        ImageLoader.display(this, file, mAvatar);
     }
 
     @Override

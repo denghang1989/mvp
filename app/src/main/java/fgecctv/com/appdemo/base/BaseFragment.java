@@ -24,8 +24,9 @@ public abstract class BaseFragment extends Fragment {
     private   InputMethodManager mIMM;
     private   boolean            mNeedHideSoft;
     private   BasePresent        mPresenter;
+    protected Realm              mRealm;
+    private   LoadingPager       mLoadingPager;
     private static final String TAG = "BaseFragment";
-    protected Realm mRealm;
 
     @Override
     public void onAttach(Context context) {
@@ -48,7 +49,21 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutId(), container, false);
+        if (mLoadingPager == null) {
+            mLoadingPager = new LoadingPager(mActivity) {
+                @Override
+                public View initSuccessView() {
+                    return View.inflate(mActivity,getLayoutId(),null);
+                }
+
+                @Override
+                protected void initLoadData() {
+
+                }
+            };
+
+        }
+        return mLoadingPager;
     }
 
     @Override
