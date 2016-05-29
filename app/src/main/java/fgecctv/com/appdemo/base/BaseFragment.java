@@ -58,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
 
                 @Override
                 protected void initLoadData() {
-
+                    BaseFragment.this.initLoadData();
                 }
             };
 
@@ -66,10 +66,14 @@ public abstract class BaseFragment extends Fragment {
         return mLoadingPager;
     }
 
+    protected void initLoadData(){
+        mPresenter.subscribe();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe();
+        mLoadingPager.triggerLoadData();
     }
 
     @Override

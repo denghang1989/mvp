@@ -80,7 +80,7 @@ public abstract class LoadingPager extends FrameLayout {
 
 
     /**
-     * @desc 根据返回数据的结果刷新UI
+     * @desc 通过回调的形式刷新UI
      */
     protected abstract void initLoadData();
 
