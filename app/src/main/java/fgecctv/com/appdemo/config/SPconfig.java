@@ -8,5 +8,5 @@ package fgecctv.com.appdemo.config;
  * @date 2016/5/19 22
  */
 public interface SPConfig {
-    String WEATHER = "weather";
+   String WEATHER = "weather";
 }

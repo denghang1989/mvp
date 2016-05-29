@@ -12,6 +12,7 @@ import fgecctv.com.appdemo.base.BaseView;
  */
 public interface MainContract {
     interface View extends BaseView {
+        void showView(int State);
         String getCity();
         void showTemp(String temp);
         void showPm25(String pm25);

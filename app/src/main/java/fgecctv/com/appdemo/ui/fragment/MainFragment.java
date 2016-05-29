@@ -3,7 +3,6 @@ package fgecctv.com.appdemo.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import fgecctv.com.appdemo.R;
@@ -19,28 +18,19 @@ import fgecctv.com.appdemo.ui.mvp.presenter.MainPresenter;
  * @Description: (用一句话描述该文件做什么)
  * @date 2016/5/17 15
  */
-public class MainFragment extends BaseFragment implements MainContract.View ,View.OnClickListener{
-
-    private TextView  mHumidity;
-    private TextView  mPm25;
-    private TextView  mTemp;
-    private Button mIcon;
+public class MainFragment extends BaseFragment implements MainContract.View, View.OnClickListener {
 
     private static final String TAG = "MainFragment";
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mHumidity = (TextView) view.findViewById(R.id.textView_humidity);
-        mPm25 = (TextView) view.findViewById(R.id.textView_pm25);
-        mTemp = (TextView) view.findViewById(R.id.textView_temp);
-        mIcon = (Button) view.findViewById(R.id.imageView_icon);
-        mIcon.setOnClickListener(this);
+
     }
 
     @Override
     protected MainPresenter getPresenter() {
-        return new MainPresenter(DataManager.getInstance(mActivity,mRealm), this);
+        return new MainPresenter(DataManager.getInstance(mActivity, mRealm), this);
     }
 
     @Override
@@ -53,18 +43,23 @@ public class MainFragment extends BaseFragment implements MainContract.View ,Vie
     }
 
     @Override
+    public void showView(int State) {
+        getLoadingPager().refreshUIByState(State);
+    }
+
+    @Override
     public String getCity() {
         return "beijing";
     }
 
     @Override
     public void showTemp(String temp) {
-        mTemp.setText(temp);
+        ((TextView)getSuccessView().findViewById(R.id.textView_temp)).setText(temp);
     }
 
     @Override
     public void showPm25(String pm25) {
-        mPm25.setText(pm25);
+        ((TextView)getSuccessView().findViewById(R.id.textView_pm25)).setText(pm25);
     }
 
     @Override
@@ -73,7 +68,7 @@ public class MainFragment extends BaseFragment implements MainContract.View ,Vie
 
     @Override
     public void showHumidity(String humidity) {
-        mHumidity.setText(humidity);
+        ((TextView)getSuccessView().findViewById(R.id.textView_humidity)).setText(humidity);
     }
 
     @Override

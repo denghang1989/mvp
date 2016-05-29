@@ -51,23 +51,19 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mLoadingPager == null) {
             mLoadingPager = new LoadingPager(mActivity) {
+
                 @Override
-                public View initSuccessView() {
-                    return View.inflate(mActivity,getLayoutId(),null);
+                public int getLayoutId() {
+                    return BaseFragment.this.getLayoutId();
                 }
 
                 @Override
-                protected void initLoadData() {
-                    BaseFragment.this.initLoadData();
+                public void initLoadData() {
+                    mPresenter.subscribe();
                 }
             };
-
         }
         return mLoadingPager;
-    }
-
-    protected void initLoadData(){
-        mPresenter.subscribe();
     }
 
     @Override
@@ -124,4 +120,14 @@ public abstract class BaseFragment extends Fragment {
         }, 200);
     }
 
+    public LoadingPager getLoadingPager() {
+        return mLoadingPager;
+    }
+
+    /**
+     * @dec: oncreateView之后的生命周期才能调用
+     */
+    public View getSuccessView() {
+        return mLoadingPager.getSuccessView();
+    }
 }

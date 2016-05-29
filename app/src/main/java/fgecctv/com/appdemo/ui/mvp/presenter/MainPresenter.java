@@ -54,6 +54,7 @@ public class MainPresenter implements MainContract.Presenter {
 
                     @Override
                     public void onNext(Weather weather) {
+                        mView.showView(3);
                         mView.showTemp(weather.getTemp());
                     }
                 });
