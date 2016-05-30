@@ -63,6 +63,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void unsubscribe() {
+        mView = null;
         mSubscriptions.clear();
         mSubscriptions.unsubscribe();
     }

@@ -31,6 +31,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void unsubscribe() {
+        mView = null;
         mSubscription.clear();
         mSubscription.unsubscribe();
     }

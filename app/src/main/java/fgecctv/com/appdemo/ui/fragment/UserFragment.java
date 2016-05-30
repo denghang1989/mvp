@@ -18,6 +18,7 @@ import fgecctv.com.appdemo.data.model.bean.User;
 import fgecctv.com.appdemo.ui.mvp.contract.UserContract;
 import fgecctv.com.appdemo.ui.mvp.presenter.UserPresenter;
 import fgecctv.com.appdemo.ui.recyclerview.CommonAdapter;
+import fgecctv.com.appdemo.ui.recyclerview.DividerItemDecoration;
 import fgecctv.com.appdemo.ui.recyclerview.OnRecyclerItemClickListener;
 import fgecctv.com.appdemo.ui.recyclerview.ViewHolder;
 import fgecctv.com.appdemo.utils.ImageLoader;
@@ -56,6 +57,7 @@ public class UserFragment extends BaseFragment implements UserContract.View {
                 holder.setText(R.id.textView_title,s);
             }
         };
+        mListView.addItemDecoration(new DividerItemDecoration(getHoldingActivity(),DividerItemDecoration.HORIZONTAL_LIST));
         mListView.setAdapter(mAdapter);
         mListView.addOnItemTouchListener(new OnRecyclerItemClickListener(mListView) {
             @Override
