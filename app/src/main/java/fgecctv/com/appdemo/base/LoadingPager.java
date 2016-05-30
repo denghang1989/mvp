@@ -17,14 +17,12 @@ import fgecctv.com.appdemo.R;
 public abstract class LoadingPager extends FrameLayout {
 
     private View mLoadingView;
-    private View mEmptyView;
     private View mErrorView;
-    private View mSuccessView;
+    private View mRightView;
     private static final int    LOADING_STATE = 0;
     private static final int    ERROR_STATE   = 1;
-    private static final int    EMPTY_STATE   = 2;
-    private static final int    SUCCESS_STATE = 3;
-    private static final int    NONE_STATE    = 4;
+    private static final int    RIGHT_STATE   = 2;
+    private static final int    NONE_STATE    = 3;
     private              int    current_state = NONE_STATE;
     private static final String TAG           = "LoadingPager";
 
@@ -40,15 +38,12 @@ public abstract class LoadingPager extends FrameLayout {
         // 数据加载中的页面
         mLoadingView = LayoutInflater.from(context).inflate(R.layout.pager_loading, null, false);
         this.addView(mLoadingView);
-        // 空页面
-        mEmptyView = LayoutInflater.from(context).inflate(R.layout.pager_empty, null, false);
-        this.addView(mEmptyView);
         // 错误页面
         mErrorView = LayoutInflater.from(context).inflate(R.layout.pager_error, null, false);
         this.addView(mErrorView);
         // 成功页面
-        mSuccessView = LayoutInflater.from(context).inflate(getLayoutId(), null, false);
-        this.addView(mSuccessView);
+        mRightView = LayoutInflater.from(context).inflate(getLayoutId(), null, false);
+        this.addView(mRightView);
 
         refreshUIByState(current_state);
     }
@@ -58,14 +53,13 @@ public abstract class LoadingPager extends FrameLayout {
      */
     public void refreshUIByState(int current_state) {
         mLoadingView.setVisibility(current_state == LOADING_STATE ? VISIBLE : GONE);
-        mEmptyView.setVisibility(current_state == EMPTY_STATE ? VISIBLE : GONE);
         mErrorView.setVisibility(current_state == ERROR_STATE ? VISIBLE : GONE);
-        mSuccessView.setVisibility(current_state == SUCCESS_STATE ? VISIBLE : GONE);
+        mRightView.setVisibility(current_state == RIGHT_STATE ? VISIBLE : GONE);
     }
 
     public void triggerLoadData() {
         // 没有加载成功 或者 不是正在加载中
-        if (current_state != SUCCESS_STATE && current_state != LOADING_STATE) {
+        if (current_state != RIGHT_STATE && current_state != LOADING_STATE) {
             // 设置当前状态
             current_state = LOADING_STATE;
             refreshUIByState(current_state);
@@ -85,7 +79,20 @@ public abstract class LoadingPager extends FrameLayout {
      */
     public abstract void initLoadData();
 
-    public View getSuccessView() {
-        return mSuccessView;
+    public View getRightView() {
+        return mRightView;
+    }
+
+    public enum SetState {
+        ERROR(ERROR_STATE), RIGHT(RIGHT_STATE);
+        int state;
+
+        SetState(int state) {
+            this.state = state;
+        }
+
+        public int getState() {
+            return state;
+        }
     }
 }

@@ -127,7 +127,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * @dec: oncreateView之后的生命周期才能调用
      */
-    public View getSuccessView() {
-        return mLoadingPager.getSuccessView();
+    public View getRightView() {
+        return mLoadingPager.getRightView();
     }
 }

@@ -2,6 +2,7 @@ package fgecctv.com.appdemo.ui.mvp.contract;
 
 import fgecctv.com.appdemo.base.BasePresent;
 import fgecctv.com.appdemo.base.BaseView;
+import fgecctv.com.appdemo.base.LoadingPager;
 
 /**
  * @author denghang
@@ -12,7 +13,7 @@ import fgecctv.com.appdemo.base.BaseView;
  */
 public interface MainContract {
     interface View extends BaseView {
-        void showView(int State);
+        void showView(LoadingPager.SetState state);
         String getCity();
         void showTemp(String temp);
         void showPm25(String pm25);

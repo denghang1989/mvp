@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
-import fgecctv.com.appdemo.config.SPConfig;
+import fgecctv.com.appdemo.config.APPConfig;
 import fgecctv.com.appdemo.data.local.DatabaseHelper;
 import fgecctv.com.appdemo.data.local.PreferencesHelper;
 import fgecctv.com.appdemo.data.model.bean.User;
@@ -65,7 +65,7 @@ public class DataManager {
         }).doOnNext(new Action1<Weather>() {
             @Override
             public void call(Weather weather) {
-                mSpHelper.put(SPConfig.WEATHER,new Gson().toJson(weather));
+                mSpHelper.put(APPConfig.WEATHER,new Gson().toJson(weather));
             }
         });
     }

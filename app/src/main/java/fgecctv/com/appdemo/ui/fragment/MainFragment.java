@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import fgecctv.com.appdemo.R;
 import fgecctv.com.appdemo.base.BaseFragment;
+import fgecctv.com.appdemo.base.LoadingPager;
 import fgecctv.com.appdemo.data.DataManager;
 import fgecctv.com.appdemo.ui.mvp.contract.MainContract;
 import fgecctv.com.appdemo.ui.mvp.presenter.MainPresenter;
@@ -43,8 +44,8 @@ public class MainFragment extends BaseFragment implements MainContract.View, Vie
     }
 
     @Override
-    public void showView(int State) {
-        getLoadingPager().refreshUIByState(State);
+    public void showView(LoadingPager.SetState state) {
+        getLoadingPager().refreshUIByState(state.getState());
     }
 
     @Override
@@ -54,12 +55,12 @@ public class MainFragment extends BaseFragment implements MainContract.View, Vie
 
     @Override
     public void showTemp(String temp) {
-        ((TextView)getSuccessView().findViewById(R.id.textView_temp)).setText(temp);
+        ((TextView) getRightView().findViewById(R.id.textView_temp)).setText(temp);
     }
 
     @Override
     public void showPm25(String pm25) {
-        ((TextView)getSuccessView().findViewById(R.id.textView_pm25)).setText(pm25);
+        ((TextView) getRightView().findViewById(R.id.textView_pm25)).setText(pm25);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class MainFragment extends BaseFragment implements MainContract.View, Vie
 
     @Override
     public void showHumidity(String humidity) {
-        ((TextView)getSuccessView().findViewById(R.id.textView_humidity)).setText(humidity);
+        ((TextView) getRightView().findViewById(R.id.textView_humidity)).setText(humidity);
     }
 
     @Override

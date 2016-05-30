@@ -2,6 +2,7 @@ package fgecctv.com.appdemo.ui.mvp.presenter;
 
 import android.support.annotation.NonNull;
 
+import fgecctv.com.appdemo.base.LoadingPager;
 import fgecctv.com.appdemo.data.DataManager;
 import fgecctv.com.appdemo.data.model.bean.Weather;
 import fgecctv.com.appdemo.ui.mvp.contract.MainContract;
@@ -54,8 +55,8 @@ public class MainPresenter implements MainContract.Presenter {
 
                     @Override
                     public void onNext(Weather weather) {
-                        mView.showView(3);
-                        mView.showTemp(weather.getTemp());
+                        mView.showView(LoadingPager.SetState.ERROR);
+                        //mView.showTemp(weather.getTemp());
                     }
                 });
         mSubscriptions.add(subscription);
