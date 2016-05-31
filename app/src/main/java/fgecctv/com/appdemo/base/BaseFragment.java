@@ -130,4 +130,5 @@ public abstract class BaseFragment extends Fragment {
     public View getRightView() {
         return mLoadingPager.getRightView();
     }
+
 }

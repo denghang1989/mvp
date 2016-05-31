@@ -13,8 +13,10 @@ import fgecctv.com.appdemo.data.model.bean.Weather;
 import fgecctv.com.appdemo.data.model.pojo.LoginResponse;
 import fgecctv.com.appdemo.data.model.pojo.WeatherDataBean;
 import fgecctv.com.appdemo.data.remote.APIService;
+import fgecctv.com.appdemo.data.remote.Results;
 import fgecctv.com.appdemo.data.remote.RetrofitService;
 import io.realm.Realm;
+import retrofit2.adapter.rxjava.Result;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -28,22 +30,22 @@ import rx.functions.Func1;
  */
 public class DataManager {
 
-    private static DataManager mDataManager;
-    private static APIService mApiService;
+    private static DataManager       mDataManager;
+    private static APIService        mApiService;
     private static PreferencesHelper mSpHelper;
-    private static DatabaseHelper mDbHelper;
+    private static DatabaseHelper    mDbHelper;
 
-    private DataManager(Context context,Realm realm) {
+    private DataManager(Context context, Realm realm) {
         mApiService = RetrofitService.getApiService(context);
         mSpHelper = PreferencesHelper.getInstance(context);
         mDbHelper = DatabaseHelper.getInstance(realm);
     }
 
-    public static DataManager getInstance(Context context,Realm realm) {
+    public static DataManager getInstance(Context context, Realm realm) {
         if (mDataManager == null) {
             synchronized (DataManager.class) {
                 if (mDataManager == null) {
-                    mDataManager = new DataManager(context,realm);
+                    mDataManager = new DataManager(context, realm);
                 }
             }
         }
@@ -51,37 +53,52 @@ public class DataManager {
     }
 
     public Observable<Weather> getWeather(String city) {
-        return mApiService.getWeatherByCity(city).map(new Func1<WeatherDataBean, Weather>() {
-            @Override
-            public Weather call(WeatherDataBean weatherDataBean) {
-                Weather weather = new Weather();
-                weather.setCity(weatherDataBean.getRetData().getCity());
-                weather.setH_tmp(weatherDataBean.getRetData().getH_tmp());
-                weather.setL_tmp(weatherDataBean.getRetData().getL_tmp());
-                weather.setTemp(weatherDataBean.getRetData().getTemp());
-                weather.setWeather(weatherDataBean.getRetData().getWeather());
-                return weather;
-            }
-        }).doOnNext(new Action1<Weather>() {
+        return mApiService.getWeatherByCity(city).
+                filter(Results.isSuccess()).
+                map(new Func1<Result<WeatherDataBean>, WeatherDataBean>() {
+                    @Override
+                    public WeatherDataBean call(Result<WeatherDataBean> weatherDataBeanResult) {
+                        return weatherDataBeanResult.response().body();
+                    }
+                }).
+                map(new Func1<WeatherDataBean, Weather>() {
+                    @Override
+                    public Weather call(WeatherDataBean weatherDataBean) {
+                        Weather weather = new Weather();
+                        weather.setCity(weatherDataBean.getRetData().getCity());
+                        weather.setH_tmp(weatherDataBean.getRetData().getH_tmp());
+                        weather.setL_tmp(weatherDataBean.getRetData().getL_tmp());
+                        weather.setTemp(weatherDataBean.getRetData().getTemp());
+                        weather.setWeather(weatherDataBean.getRetData().getWeather());
+                        return weather;
+                    }
+                }).doOnNext(new Action1<Weather>() {
             @Override
             public void call(Weather weather) {
-                mSpHelper.put(APPConfig.WEATHER,new Gson().toJson(weather));
+                mSpHelper.put(APPConfig.WEATHER, new Gson().toJson(weather));
             }
         });
     }
-    
+
     public Observable<User> getUserInfo() {
         return mDbHelper.getUserInfo().map(new Func1<User, User>() {
             @Override
             public User call(User user) {
                 // TODO: 2016/5/25
-                return user!=null?user:null;
+                return user != null ? user : null;
             }
         });
     }
 
-    public Observable<LoginResponse> login(String id,String passward) {
-        return mApiService.login(id,passward).doOnNext(new Action1<LoginResponse>() {
+    public Observable<LoginResponse> login(String id, String passward) {
+        return mApiService.login(id, passward).
+                filter(Results.isSuccess()).
+                map(new Func1<Result<LoginResponse>, LoginResponse>() {
+                    @Override
+                    public LoginResponse call(Result<LoginResponse> loginResponseResult) {
+                        return loginResponseResult.response().body();
+                    }
+                }).doOnNext(new Action1<LoginResponse>() {
             @Override
             public void call(LoginResponse loginResponse) {
                 mDbHelper.saveUserInfo(loginResponse.getUser());

@@ -26,7 +26,6 @@ public class MainFragment extends BaseFragment implements MainContract.View, Vie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     @Override

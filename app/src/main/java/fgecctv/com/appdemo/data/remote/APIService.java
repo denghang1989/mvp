@@ -3,6 +3,7 @@ package fgecctv.com.appdemo.data.remote;
 import fgecctv.com.appdemo.data.model.pojo.FourDayWeather;
 import fgecctv.com.appdemo.data.model.pojo.LoginResponse;
 import fgecctv.com.appdemo.data.model.pojo.WeatherDataBean;
+import retrofit2.adapter.rxjava.Result;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -26,15 +27,15 @@ public interface APIService {
     // 百度天气api 获取天气 手动解析
     @Headers("apikey:cec4e963be2a3073785eeaa9c3aa237f")
     @GET("http://apis.baidu.com/apistore/weatherservice/weather")
-    Observable<WeatherDataBean> getWeatherByCity(@Query("citypinyin") String citypinyin);
+    Observable<Result<WeatherDataBean>> getWeatherByCity(@Query("citypinyin") String citypinyin);
 
     /*百度未来4天天气的api*/
     @Headers("apikey:cec4e963be2a3073785eeaa9c3aa237f")
     @GET("http://apis.baidu.com/apistore/weatherservice/recentweathers")
-    Observable<FourDayWeather> get4dayWeatherDataByCity(@Query("cityname") String city);
+    Observable<Result<FourDayWeather>> get4dayWeatherDataByCity(@Query("cityname") String city);
 
     /*登入*/
     @FormUrlEncoded
     @POST("http://apis.baidu.com/apistore/weatherservice/recentweathers")
-    Observable<LoginResponse> login(@Field("useid") String useid,@Field("passward") String passward);
+    Observable<Result<LoginResponse>> login(@Field("useid") String useid, @Field("passward") String passward);
 }
