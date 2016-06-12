@@ -5,12 +5,11 @@ import android.app.Application;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
 import com.bumptech.glide.load.model.GlideUrl;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.io.InputStream;
 
 import fgecctv.com.appdemo.data.remote.OkHttpHelper;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 /**
  * @author denghang
@@ -24,22 +23,22 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initRealm();
+        initDatabase();
         initGlide();
     }
 
     /**
-     * 初始化glide数据库
+     * 初始化数据库
+     */
+    private void initDatabase() {
+        FlowManager.init(this);
+    }
+
+    /**
+     * 初始化glide
      */
     private void initGlide() {
         Glide.get(this).register(GlideUrl.class,InputStream.class,new OkHttpUrlLoader.Factory(OkHttpHelper.createClient(getApplicationContext())));
     }
 
-    /**
-     * 初始化Realm数据库
-     */
-    private void initRealm() {
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
-        Realm.setDefaultConfiguration(realmConfiguration);
-    }
 }

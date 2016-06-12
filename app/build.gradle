@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
-//添加如下代码，应用apt插件
 apply plugin: 'com.neenbedankt.android-apt'
+
+def dbflow_version = "3.0.0-beta4"
 
 android {
     compileSdkVersion 23
@@ -26,15 +26,6 @@ android {
     }
 }
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "io.realm:realm-gradle-plugin:0.90.0"
-    }
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -53,8 +44,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile 'com.google.dagger:dagger:2.4'
-    apt 'com.google.dagger:dagger-compiler:2.4'
-    //java注解
-    compile 'org.glassfish:javax.annotation:10.0-b28'
+
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    // use kapt for kotlin apt
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+
 }

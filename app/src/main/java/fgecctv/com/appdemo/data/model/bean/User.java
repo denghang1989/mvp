@@ -1,52 +1,28 @@
 package fgecctv.com.appdemo.data.model.bean;
 
-import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import fgecctv.com.appdemo.data.local.dbmanager.AppDatabase;
 
 /**
  * @author denghang
  * @version V1.0
  * @Package fgecctv.com.appdemo.data.model.bean
- * @Description: (demo 演示 realm)
+ * @Description:
  * @date 2016/5/5 15
  */
-public class User extends RealmObject {
+@Table(database = AppDatabase.class)
+public class User extends BaseModel {
+    //自增ID
+    @PrimaryKey(autoincrement = true)
+    public  Long   id;
+    @Column
     private String name;
-    private int    age;
+    @Column
+    private int    gender;
+    @Column
     private String imageUrl;
-
-    @Ignore
-    private int sessionId;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }
