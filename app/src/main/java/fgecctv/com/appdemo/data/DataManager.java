@@ -37,6 +37,7 @@ public class DataManager {
     private DataManager(Context context) {
         mApiService = RetrofitService.getApiService(context);
         mSpHelper = PreferencesHelper.getInstance(context);
+        mDbHelper = DatabaseHelper.getInstance();
     }
 
     public static DataManager getInstance(Context context) {
@@ -98,8 +99,8 @@ public class DataManager {
         });
     }
 
-    public Observable<User> getUserInfor() {
-        return null;
+    public Observable<User> findAllUser() {
+        return mDbHelper.findAllUser();
     }
 
 }

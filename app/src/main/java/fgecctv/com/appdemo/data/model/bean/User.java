@@ -18,11 +18,11 @@ import fgecctv.com.appdemo.data.local.dbmanager.AppDatabase;
 public class User extends BaseModel {
     //自增ID
     @PrimaryKey(autoincrement = true)
-    public  Long   id;
+    Long   id;
     @Column
-    private String name;
+    String name;
     @Column
-    private int    gender;
+    int    gender;
     @Column
-    private String imageUrl;
+    String imageUrl;
 }

@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
-import io.realm.Realm;
-
 /**
  * @author denghang
  * @version V1.0
@@ -24,7 +22,6 @@ public abstract class BaseFragment extends Fragment {
     private   InputMethodManager mIMM;
     private   boolean            mNeedHideSoft;
     private   BasePresent        mPresenter;
-    protected Realm              mRealm;
     private   LoadingPager       mLoadingPager;
     private static final String TAG = "BaseFragment";
 
@@ -42,7 +39,6 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mIMM = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        mRealm = Realm.getDefaultInstance();
         mPresenter = getPresenter();
     }
 
@@ -84,7 +80,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mRealm.close();
     }
 
     protected abstract BasePresent getPresenter();

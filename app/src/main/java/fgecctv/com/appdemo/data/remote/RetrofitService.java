@@ -2,12 +2,9 @@ package fgecctv.com.appdemo.data.remote;
 
 import android.content.Context;
 
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.realm.RealmObject;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -27,7 +24,6 @@ public class RetrofitService {
     private static Retrofit createRetrofit(Context context) {
         Gson gson = new GsonBuilder().
                 setDateFormat("yyyy-MM-dd HH:mm:ss").
-                setExclusionStrategies(new MyExclusionStrategy()).
                 create();
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -48,20 +44,4 @@ public class RetrofitService {
         return apiService;
     }
 
-
-    /**
-     * 配置table对象的实例化，对象的实例化需要手动存储一下
-     */
-    static class MyExclusionStrategy implements ExclusionStrategy {
-
-        @Override
-        public boolean shouldSkipField(FieldAttributes f) {
-            return f.getDeclaringClass().equals(RealmObject.class);
-        }
-
-        @Override
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
-    }
 }
