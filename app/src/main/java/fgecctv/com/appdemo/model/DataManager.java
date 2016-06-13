@@ -1,4 +1,4 @@
-package fgecctv.com.appdemo.data;
+package fgecctv.com.appdemo.model;
 
 
 import android.content.Context;
@@ -6,15 +6,15 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 import fgecctv.com.appdemo.config.APPConfig;
-import fgecctv.com.appdemo.data.local.DatabaseHelper;
-import fgecctv.com.appdemo.data.local.PreferencesHelper;
-import fgecctv.com.appdemo.data.model.bean.User;
-import fgecctv.com.appdemo.data.model.pojo.LoginResponse;
-import fgecctv.com.appdemo.data.model.pojo.Weather;
-import fgecctv.com.appdemo.data.model.pojo.WeatherDataBean;
-import fgecctv.com.appdemo.data.remote.APIService;
-import fgecctv.com.appdemo.data.remote.Results;
-import fgecctv.com.appdemo.data.remote.RetrofitService;
+import fgecctv.com.appdemo.model.local.DatabaseHelper;
+import fgecctv.com.appdemo.model.local.PreferencesHelper;
+import fgecctv.com.appdemo.model.data.entity.User;
+import fgecctv.com.appdemo.model.data.pojo.LoginResponse;
+import fgecctv.com.appdemo.model.data.pojo.Weather;
+import fgecctv.com.appdemo.model.data.pojo.WeatherDataBean;
+import fgecctv.com.appdemo.model.remote.APIService;
+import fgecctv.com.appdemo.model.remote.Results;
+import fgecctv.com.appdemo.model.remote.RetrofitService;
 import retrofit2.adapter.rxjava.Result;
 import rx.Observable;
 import rx.functions.Action1;
@@ -23,7 +23,6 @@ import rx.functions.Func1;
 /**
  * @author denghang
  * @version V1.0
- * @Package fgecctv.com.appdemo.data
  * @Description:
  * @date 2016/5/5 10
  */

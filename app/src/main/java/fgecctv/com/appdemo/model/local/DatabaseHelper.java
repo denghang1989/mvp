@@ -1,7 +1,7 @@
-package fgecctv.com.appdemo.data.local;
+package fgecctv.com.appdemo.model.local;
 
-import fgecctv.com.appdemo.data.local.daoservice.UserService;
-import fgecctv.com.appdemo.data.model.bean.User;
+import fgecctv.com.appdemo.model.local.daoservice.UserService;
+import fgecctv.com.appdemo.model.data.entity.User;
 import rx.Observable;
 
 /**

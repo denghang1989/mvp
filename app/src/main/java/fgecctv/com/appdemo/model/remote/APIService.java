@@ -1,8 +1,8 @@
-package fgecctv.com.appdemo.data.remote;
+package fgecctv.com.appdemo.model.remote;
 
-import fgecctv.com.appdemo.data.model.pojo.FourDayWeather;
-import fgecctv.com.appdemo.data.model.pojo.LoginResponse;
-import fgecctv.com.appdemo.data.model.pojo.WeatherDataBean;
+import fgecctv.com.appdemo.model.data.pojo.FourDayWeather;
+import fgecctv.com.appdemo.model.data.pojo.LoginResponse;
+import fgecctv.com.appdemo.model.data.pojo.WeatherDataBean;
 import retrofit2.adapter.rxjava.Result;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

@@ -1,16 +1,15 @@
-package fgecctv.com.appdemo.data.model.bean;
+package fgecctv.com.appdemo.model.data.entity;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
-import fgecctv.com.appdemo.data.local.dbmanager.AppDatabase;
+import fgecctv.com.appdemo.model.local.dbmanager.AppDatabase;
 
 /**
  * @author denghang
  * @version V1.0
- * @Package fgecctv.com.appdemo.data.model.bean
  * @Description:
  * @date 2016/5/5 15
  */

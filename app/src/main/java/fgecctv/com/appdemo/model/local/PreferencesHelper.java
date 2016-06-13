@@ -1,4 +1,4 @@
-package fgecctv.com.appdemo.data.local;
+package fgecctv.com.appdemo.model.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;

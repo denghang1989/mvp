@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.io.InputStream;
 
-import fgecctv.com.appdemo.data.remote.OkHttpHelper;
+import fgecctv.com.appdemo.model.remote.OkHttpHelper;
 
 /**
  * @author denghang

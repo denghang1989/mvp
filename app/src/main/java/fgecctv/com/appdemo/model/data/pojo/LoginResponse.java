@@ -1,6 +1,6 @@
-package fgecctv.com.appdemo.data.model.pojo;
+package fgecctv.com.appdemo.model.data.pojo;
 
-import fgecctv.com.appdemo.data.model.bean.User;
+import fgecctv.com.appdemo.model.data.entity.User;
 
 /**
  * @author denghang

@@ -4,13 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * @author denghang
- * @version V1.0
- * @Package fgecctv.com.appdemo.utils
- * @Description: (MD5加密)
- * @date 2016/5/14 09
- */
 public class Md5 {
 
     public static String getVal(String plainText) {

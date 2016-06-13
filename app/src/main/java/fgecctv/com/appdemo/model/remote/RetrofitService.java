@@ -1,4 +1,4 @@
-package fgecctv.com.appdemo.data.remote;
+package fgecctv.com.appdemo.model.remote;
 
 import android.content.Context;
 

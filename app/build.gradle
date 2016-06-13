@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
-def dbflow_version = "3.0.0-beta4"
 
 android {
     compileSdkVersion 23
@@ -27,27 +26,32 @@ android {
 }
 
 dependencies {
+    final OKHTTP_VERSION = '3.2.0'
+    final RETROFIT_VERSION = '2.0.2'
+    final SUPPORT_VERSION = '23.4.0'
+    final DBFLOW_VERSION = "3.0.0-beta4"
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit2:retrofit-adapters:2.0.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
+    compile "com.squareup.okhttp3:logging-interceptor:${OKHTTP_VERSION}"
+    compile "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
+    compile "com.squareup.retrofit2:retrofit-adapters:${RETROFIT_VERSION}"
+    compile "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
     compile 'io.reactivex:rxjava:1.1.4'
     compile 'io.reactivex:rxandroid:1.2.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.zhy:autolayout:1.4.3'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile "com.android.support:design:${SUPPORT_VERSION}"
+    compile "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
+    compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
     compile 'de.hdodenhof:circleimageview:2.0.0'
 
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${DBFLOW_VERSION}"
     // use kapt for kotlin apt
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
-    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${DBFLOW_VERSION}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${DBFLOW_VERSION}"
 
 }

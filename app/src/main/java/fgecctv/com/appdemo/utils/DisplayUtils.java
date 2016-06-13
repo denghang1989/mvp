@@ -9,7 +9,6 @@ import android.util.DisplayMetrics;
  * @author denghang
  * @version V1.0
  * @Package fgecctv.com.appdemo.utils
- * @Description: ()
  * @date 2016/5/26 09
  */
 public class DisplayUtils {

@@ -1,4 +1,4 @@
-package fgecctv.com.appdemo.data.model.pojo;
+package fgecctv.com.appdemo.model.data.pojo;
 
 import java.util.List;
 
