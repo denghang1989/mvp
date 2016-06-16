@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-
-import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
  * @Description: (使用hongyang的百分比布局, 需要继承AutoLayoutActivity)
  * @date 2016/5/10 22
  */
-public abstract class BaseActivity extends AutoLayoutActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

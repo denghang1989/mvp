@@ -20,8 +20,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility 1.7
+        targetCompatibility 1.7
     }
 }
 
@@ -30,7 +30,6 @@ dependencies {
     final RETROFIT_VERSION = '2.0.2'
     final SUPPORT_VERSION = '23.4.0'
     final DBFLOW_VERSION = "3.0.0-beta4"
-
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
@@ -38,20 +37,18 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
     compile "com.squareup.retrofit2:retrofit-adapters:${RETROFIT_VERSION}"
     compile "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${RETROFIT_VERSION}"
     compile 'io.reactivex:rxjava:1.1.4'
     compile 'io.reactivex:rxandroid:1.2.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    compile 'com.zhy:autolayout:1.4.3'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     compile "com.android.support:design:${SUPPORT_VERSION}"
     compile "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
     compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
     compile 'de.hdodenhof:circleimageview:2.0.0'
-
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${DBFLOW_VERSION}"
-    // use kapt for kotlin apt
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${DBFLOW_VERSION}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${DBFLOW_VERSION}"
-
+    compile 'com.google.guava:guava:19.0'
+    compile 'com.jakewharton:butterknife:8.1.0'
 }

@@ -3,6 +3,7 @@ package fgecctv.com.appdemo.model;
 
 import android.content.Context;
 
+import com.google.common.base.Objects;
 import com.google.gson.Gson;
 
 import fgecctv.com.appdemo.config.APPConfig;
@@ -90,16 +91,16 @@ public class DataManager {
                     public LoginResponse call(Result<LoginResponse> loginResponseResult) {
                         return loginResponseResult.response().body();
                     }
-                }).doOnNext(new Action1<LoginResponse>() {
-            @Override
-            public void call(LoginResponse loginResponse) {
-
-            }
-        });
+                });
     }
 
     public Observable<User> findAllUser() {
-        return mDbHelper.findAllUser();
+        return mDbHelper.findAllUser().filter(new Func1<User, Boolean>() {
+            @Override
+            public Boolean call(User user) {
+                return Objects.equal(user.name,"haha");
+            }
+        });
     }
 
 }
