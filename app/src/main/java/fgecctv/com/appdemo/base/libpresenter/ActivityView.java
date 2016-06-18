@@ -28,6 +28,51 @@ public abstract class ActivityView<V extends IView, P extends Presenter<V>> exte
     private P presenter;
     private V viewDelegate;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        RetainInstance instance = (RetainInstance) getLastCustomNonConfigurationInstance();
+        //noinspection unchecked
+        presenter = (P) instance.presenter;
+        if (viewDelegate == null) {
+            viewDelegate = createViewDelegate();
+        }
+        if (presenter == null) {
+            presenter = createPresenter(viewDelegate);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (getPresenter() != null) {
+            getPresenter().resume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (getPresenter() != null) {
+            getPresenter().pause();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (getPresenter() != null) {
+            //noinspection unchecked
+            getPresenter().dropView(viewDelegate);
+            if (!retainPresenter || isFinishing()) {
+                getPresenter().close();
+            }
+        }
+
+        super.onDestroy();
+    }
+
     @SuppressWarnings("unchecked")
     protected V createViewDelegate() {
         return (V) this;
@@ -98,20 +143,6 @@ public abstract class ActivityView<V extends IView, P extends Presenter<V>> exte
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        RetainInstance instance = (RetainInstance) getLastCustomNonConfigurationInstance();
-        //noinspection unchecked
-        presenter = (P) instance.presenter;
-        if (viewDelegate == null) {
-            viewDelegate = createViewDelegate();
-        }
-        if (presenter == null) {
-            presenter = createPresenter(viewDelegate);
-        }
-    }
-
-    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
@@ -119,15 +150,6 @@ public abstract class ActivityView<V extends IView, P extends Presenter<V>> exte
             //noinspection unchecked
             getPresenter().takeView(viewDelegate);
             getPresenter().load(savedInstanceState);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (getPresenter() != null) {
-            getPresenter().resume();
         }
     }
 
@@ -140,25 +162,4 @@ public abstract class ActivityView<V extends IView, P extends Presenter<V>> exte
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    protected void onPause() {
-        if (getPresenter() != null) {
-            getPresenter().pause();
-        }
-
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (getPresenter() != null) {
-            //noinspection unchecked
-            getPresenter().dropView(viewDelegate);
-            if (!retainPresenter || isFinishing()) {
-                getPresenter().close();
-            }
-        }
-
-        super.onDestroy();
-    }
 }
