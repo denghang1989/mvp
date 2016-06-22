@@ -9,6 +9,7 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.io.InputStream;
 
+import fgecctv.com.appdemo.model.DataManager;
 import fgecctv.com.appdemo.model.remote.OkHttpHelper;
 
 /**
@@ -20,11 +21,21 @@ import fgecctv.com.appdemo.model.remote.OkHttpHelper;
  */
 public class BaseApplication extends Application {
 
+    private DataManager mDataManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
         initDatabase();
         initGlide();
+        initDataManager();
+    }
+
+    /**
+     * 实例化全局的数据对象
+     */
+    private void initDataManager() {
+        mDataManager = DataManager.getInstance(getApplicationContext());
     }
 
     /**
@@ -39,6 +50,10 @@ public class BaseApplication extends Application {
      */
     private void initGlide() {
         Glide.get(this).register(GlideUrl.class,InputStream.class,new OkHttpUrlLoader.Factory(OkHttpHelper.createClient(getApplicationContext())));
+    }
+
+    public DataManager getDataManager() {
+        return mDataManager;
     }
 
 }

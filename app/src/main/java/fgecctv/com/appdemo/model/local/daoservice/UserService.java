@@ -44,4 +44,7 @@ public class UserService {
         user.save();
     }
 
+    public static User findUserById(long id) {
+        return SQLite.select().from(User.class).where(User_Table.id.is(id)).querySingle();
+    }
 }

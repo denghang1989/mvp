@@ -3,6 +3,7 @@ package fgecctv.com.appdemo.model.local;
 import fgecctv.com.appdemo.model.local.daoservice.UserService;
 import fgecctv.com.appdemo.model.data.entity.User;
 import rx.Observable;
+import rx.Subscriber;
 
 /**
  * @author denghang
@@ -35,6 +36,16 @@ public class DatabaseHelper {
 
     public Observable<User> findUserByName(String name) {
         return Observable.just(UserService.findUserByName(name));
+    }
+
+    public Observable<User> findUserById(final int id) {
+        return Observable.create(new Observable.OnSubscribe<User>() {
+            @Override
+            public void call(Subscriber<? super User> subscriber) {
+                subscriber.onNext(UserService.findUserById(id));
+                subscriber.onCompleted();
+            }
+        });
     }
 
 }
